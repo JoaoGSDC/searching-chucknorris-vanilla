@@ -9,6 +9,10 @@ export default () => {
   }
 
   function handleNavigateToSearchScreen() {
+    if (searchInputValue === '') {
+      return;
+    }
+
     let searchButton = document.getElementsByName('searchButton')[0] as any;
     searchButton.href = `/search?q=${searchInputValue}`;
   }

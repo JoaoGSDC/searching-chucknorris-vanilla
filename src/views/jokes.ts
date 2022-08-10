@@ -1,4 +1,5 @@
 export default () => {
+  let loaded = false;
   window.addEventListener('load', handleSearchItem);
 
   function handleSearchItem() {
@@ -8,7 +9,10 @@ export default () => {
     let joke = document.getElementById('joke');
 
     fetch(`https://api.chucknorris.io/jokes/${query}`).then((resp) =>
-      resp.json().then((data) => ((joke as HTMLElement).innerHTML = renderJoke(data)))
+      resp.json().then((data) => {
+        (joke as HTMLElement).innerHTML = renderJoke(data);
+        loaded = true;
+      })
     );
   }
 
@@ -24,5 +28,9 @@ export default () => {
     `;
   }
 
-  return `<section id="joke" class="content__jokes"></section>`;
+  return `
+    <section id="joke" class="content__jokes">
+      ${!loaded ? `<div class="content__loader"><div class="loader"></div></div>` : `<></>`}
+    </section>
+  `;
 };

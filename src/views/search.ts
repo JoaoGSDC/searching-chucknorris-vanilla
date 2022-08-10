@@ -1,5 +1,6 @@
 export default () => {
   let searchInputValue = '';
+  let loaded = false;
 
   window.addEventListener('load', handleSearchItems);
 
@@ -10,7 +11,10 @@ export default () => {
     let researches = document.getElementById('researches');
 
     fetch(`https://api.chucknorris.io/jokes/search?query=${query}`).then((resp) =>
-      resp.json().then((data) => ((researches as HTMLElement).innerHTML = researchesItems(data.result)))
+      resp.json().then((data) => {
+        (researches as HTMLElement).innerHTML = researchesItems(data.result);
+        loaded = true;
+      })
     );
   }
 
@@ -55,6 +59,8 @@ export default () => {
           <input type="text" />
         </div>
 
-        <section id="researches" class="content__search"></section>
+        <section id="researches" class="content__search">
+          ${!loaded ? `<div class="content__loader"><div class="loader"></div></div>` : `<></>`}
+        </section>
     `;
 };
