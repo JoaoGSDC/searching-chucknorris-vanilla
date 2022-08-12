@@ -1,36 +1,36 @@
-export default () => {
+import { Paginator } from '../components/paginator';
+
+export const Search = () => {
+  const paginator = Paginator();
+
   let searchInputValue = '';
-  let loaded = false;
 
   window.addEventListener('load', handleSearchItems);
 
   function handleSearchItems() {
+    const reasearch = document.getElementById('reasearch') as HTMLElement;
+    reasearch.innerHTML = `
+    <div class="content__loader">
+      <div class="loader"></div>
+    </div>
+    <div id="list" class="content__search--items"></div>`;
+
     const { search } = location;
     let query = search.split('=')[1];
 
-    let researches = document.getElementById('researches');
-
     fetch(`https://api.chucknorris.io/jokes/search?query=${query}`).then((resp) =>
       resp.json().then((data) => {
-        (researches as HTMLElement).innerHTML = researchesItems(data.result);
-        loaded = true;
+        reasearch.innerHTML = `
+        <div id="list" class="content__search--items"></div>
+        <div id="pagination" class="content__search--pagenumbers"></div>`;
+
+        const listElement = document.getElementById('list') as HTMLElement;
+        const paginationElement = document.getElementById('pagination') as HTMLElement;
+
+        paginator.displayList(data.result, listElement);
+        paginator.setupPagination(data.result, paginationElement, listElement);
       })
     );
-  }
-
-  function researchesItems(data: any[]) {
-    return `
-        <div class="content__search--items">
-            ${data.map((item) => {
-              return `
-                <div>
-                    <a href="/jokes?q=${item.id}"><h3>${item.value}</h3></a>
-                    <h4>${item.value}</h4>
-                </div>
-              `;
-            })}
-        </div>
-    `.replace(/,/g, '');
   }
 
   document.addEventListener('input', handleAddValueInStorage);
@@ -59,8 +59,6 @@ export default () => {
           <input type="text" />
         </div>
 
-        <section id="researches" class="content__search">
-          ${!loaded ? `<div class="content__loader"><div class="loader"></div></div>` : `<></>`}
-        </section>
+        <section id="reasearch" class="content__search"></section>
     `;
 };

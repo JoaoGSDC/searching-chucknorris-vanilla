@@ -1,22 +1,20 @@
-export default () => {
-  let loaded = false;
+import { IChuckNorris } from '../interfaces/IChuckNorris';
+
+export const Jokes = () => {
   window.addEventListener('load', handleSearchItem);
 
   function handleSearchItem() {
     const { search } = location;
     let query = search.split('=')[1];
 
-    let joke = document.getElementById('joke');
+    let joke = document.getElementById('joke') as HTMLElement;
 
     fetch(`https://api.chucknorris.io/jokes/${query}`).then((resp) =>
-      resp.json().then((data) => {
-        (joke as HTMLElement).innerHTML = renderJoke(data);
-        loaded = true;
-      })
+      resp.json().then((data) => (joke.innerHTML = renderJoke(data)))
     );
   }
 
-  function renderJoke(item: any) {
+  function renderJoke(item: IChuckNorris) {
     return `
       <figure>
         <img src="https://api.chucknorris.io/img/chucknorris_logo_coloured_small@2x.png" alt="logo_chucknorris" />
@@ -30,7 +28,9 @@ export default () => {
 
   return `
     <section id="joke" class="content__jokes">
-      ${!loaded ? `<div class="content__loader"><div class="loader"></div></div>` : `<></>`}
+      <div class="content__loader">
+        <div class="loader"></div>
+      </div>
     </section>
   `;
 };

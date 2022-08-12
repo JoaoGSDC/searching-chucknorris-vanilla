@@ -1,4 +1,4 @@
-export default () => {
+export const Home = () => {
   let searchInputValue = '';
 
   document.addEventListener('input', handleAddValueInStorage);

@@ -64,6 +64,7 @@
   @extend .content;
 
   margin-top: 100px;
+  flex-direction: column;
 
   .content__search--items {
     display: flex;
@@ -112,6 +113,15 @@
       margin-left: 32px;
       max-width: calc(100% - 64px);
     }
+  }
+
+  .content__search--pagenumbers {
+    margin-left: 180px;
+    padding-top: 16px;
+    padding-bottom: 32px;
+    width: 45%;
+    display: flex;
+    justify-content: center;
   }
 }
 
