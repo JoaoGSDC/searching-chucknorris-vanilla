@@ -125,7 +125,7 @@
 
     @media only screen and (max-width: 600px) {
       margin-left: 32px;
-      max-width: calc(100% - 64px);
+      width: calc(100% - 64px);
     }
   }
 }
