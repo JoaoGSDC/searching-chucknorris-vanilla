@@ -1,8 +1,16 @@
+import { getRandomInt } from '../utils/getRandomInt';
+
 export const Home = () => {
   let searchInputValue = '';
 
   document.addEventListener('input', handleAddValueInStorage);
-  document.addEventListener('click', handleNavigateToSearchScreen);
+  document.addEventListener('click', () => {
+    const searchButton = document.getElementById('searchButton') as HTMLElement;
+    searchButton.addEventListener('click', handleNavigateToSearchScreen);
+
+    const luckButton = document.getElementById('luck') as HTMLElement;
+    luckButton.addEventListener('click', handleSearchRandomJoke);
+  });
 
   function handleAddValueInStorage(e: any) {
     searchInputValue = e.target.value.replace(/ /g, '+');
@@ -15,6 +23,27 @@ export const Home = () => {
 
     let searchButton = document.getElementsByName('searchButton')[0] as any;
     searchButton.href = `/search?q=${searchInputValue}`;
+
+    let searchInput = document.getElementsByName('search')[0] as HTMLInputElement;
+    searchInput.value = '';
+  }
+
+  function handleSearchRandomJoke() {
+    if (searchInputValue === '') {
+      return;
+    }
+
+    fetch(`https://api.chucknorris.io/jokes/search?query=${searchInputValue}`).then((resp) =>
+      resp.json().then((data) => {
+        const index = getRandomInt(0, data.result.length - 1);
+        const item = data.result[index];
+
+        let searchInput = document.getElementsByName('search')[0] as HTMLInputElement;
+        searchInput.value = '';
+
+        window.location.href = `/jokes?q=${item.id}`;
+      })
+    );
   }
 
   return `
@@ -24,8 +53,8 @@ export const Home = () => {
         <input type="text" class="search" name="search" value="${searchInputValue}" />
 
         <div class="home__container">
-            <a name="searchButton" href="" data-link><button type="button">Pesquisar Chuck Norris</button></a>
-            <button type="button">Estou com sorte</button>
+            <a name="searchButton" href="" data-link><button id="searchButton" type="button">Pesquisar Chuck Norris</button></a>
+            <button id="luck" type="button">Estou com sorte</button>
         </div>
     </section>
     `;
