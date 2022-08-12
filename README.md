@@ -35,3 +35,4 @@ Projeto ChuckNorrisAPI - Vanilla JS
 ## Observações
 
 - Minha intensão foi ser bem minimalista com relação ao desenvolvimento dessa aplicação, apenas criei o suficiente que comprova os meus conhecimentos em torno de desenvolver uma aplicação totalmente pura, sem a interferência de frameworks
+- Caso queira ver uma versão hospedada, basta <a href="https://searching-chucknorris.netlify.app/">clicar aqui</a>
