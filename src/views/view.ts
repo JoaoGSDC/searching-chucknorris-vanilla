@@ -5,7 +5,7 @@ export class View {
     this._element = element;
   }
 
-  template(controller: any) {
+  template(_controller: any) {
     throw new Error('O método template deve ser implementado nesta classe');
   }
 
