@@ -11,8 +11,6 @@ export class SearchController implements ISearch {
     this._searchInputValue = model.searchInputValue;
 
     window.addEventListener('load', this._handleSearchItems);
-
-    document.addEventListener('input', this._handleAddValueInStorage);
     document.onkeydown = () => this._handleSearchItem();
   }
 
@@ -36,10 +34,6 @@ export class SearchController implements ISearch {
       paginator.displayList(data.result, listElement);
       paginator.setupPagination(data.result, paginationElement, listElement);
     });
-  }
-
-  _handleAddValueInStorage(e: any) {
-    this._searchInputValue = e.target.value.replace(/ /g, '+');
   }
 
   _handleSearchItem() {
