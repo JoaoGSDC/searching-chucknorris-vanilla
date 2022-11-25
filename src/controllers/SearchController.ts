@@ -47,6 +47,9 @@ export class SearchController implements ISearch {
       return;
     }
 
+    const searchInput = document.getElementsByName('search')[0] as HTMLInputElement;
+    this._searchInputValue = searchInput.value;
+
     window.location.href = `/search?q=${this._searchInputValue}`;
   }
 }

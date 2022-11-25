@@ -10,7 +10,7 @@ export class SearchView extends View {
           </figure>
         </a>
 
-        <input type="text" />
+        <input type="text" class="search" name="search" value="" />
       </div>
 
       <section id="reasearch" class="content__search"></section>
