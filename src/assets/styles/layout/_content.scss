@@ -73,7 +73,7 @@
     margin-left: 180px;
 
     h3 {
-      color: #8ab4f8;
+      color: var(--blue-text);
       text-decoration: none;
       -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
       overflow: hidden;
@@ -97,7 +97,7 @@
     }
 
     h4 {
-      color: #bdc1c6;
+      color: var(--opacity-text-color);
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -148,7 +148,7 @@
   }
 
   .content__jokes--joke {
-    background-color: #262e38;
+    background-color: var(--dark-text);
     padding: 16px;
     border-radius: 8px;
     border-left: 16px solid var(--main-color);

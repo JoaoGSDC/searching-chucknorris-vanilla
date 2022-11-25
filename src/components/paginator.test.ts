@@ -6,6 +6,8 @@ import { Paginator } from './paginator';
 import { IChuckNorris } from '../interfaces/IChuckNorris';
 
 describe('Paginator rendering', () => {
+  const paginator = new Paginator();
+
   let items: IChuckNorris[] = [
     {
       icon_url: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
@@ -20,7 +22,7 @@ describe('Paginator rendering', () => {
     const element = document.createElement('div');
     element.id = 'list';
 
-    Paginator().displayList(items, element);
+    paginator.displayList(items, element);
     expect(element.innerHTML).toContain('h3');
   });
 
@@ -31,7 +33,7 @@ describe('Paginator rendering', () => {
     const elementPaginator = document.createElement('div');
     elementPaginator.id = 'pagination';
 
-    Paginator().setupPagination(items, elementPaginator, elementList);
+    paginator.setupPagination(items, elementPaginator, elementList);
     expect(elementPaginator.innerHTML).toContain('button');
   });
 });
